@@ -1,8 +1,11 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 #function HHCLAMP2  does the analytic solution of the voltage clamped axon
+
 
 
 # evenly sampled time at 50ms intervals
@@ -10,6 +13,8 @@ t = np.arange(0., 7., 0.05)
 
 # The membrane patch is held at specified voltage (Vm) of
 v = +30.0 #mV
+
+
 
 # The n-type subunits
 a1 = 0.01 * (-50-v) / (np.exp((-50 - v) / 10) - 1)
@@ -31,7 +36,7 @@ n0 = 0.3
 m0 = 0.05
 h0 = 0.6
 
-# Calculate functions
+
 n = n_inf - (n_inf - n0) * np.exp(-t * a1 / n_inf)
 m = m_inf - (m_inf - m0) * np.exp(-t * a2 / m_inf)
 h = h_inf - (h_inf - h0) * np.exp(-t * a3 / h_inf)
@@ -40,12 +45,14 @@ y1 = 120.* m**3 * h * (v - 55) / 1000
 y2 = 36. * n**4 * (v + 72) / 1000
 y3 = y1 + y2
 
-# Plot functions
-INa = 'I_{Na}'
-IK = 'I_{K}'
-Vm = 'V_{m}'
 
-plt.suptitle('Total current, ${}$ and ${}$ for ${}$ = +30 mV'.format(INa, IK, Vm))
+#simple plot
+plt.plot(t, y1, 'r', t, y2, 'b', t, y3, 'g');
+
+
+
+# plot includes lables
+plt.suptitle('Total current, ${}$ and ${}$ for ${}$ = +30 mV'.format('I_{Na}', 'I_{K}', 'V_{m}'))
 plt.xlabel('Time (ms)')
 plt.ylabel('I (mA)')
 plt.plot(t, y1, 'r', t, y2, 'b', t, y3, 'g')
